@@ -51,7 +51,6 @@ class Monitor:
             "total_memory": int(total_memory),
             "free_memory": int(free_memory),
             "available_memory": int(available_memory)
-            "disk space": "0"
         }
         return data
 
