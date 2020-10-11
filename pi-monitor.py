@@ -60,8 +60,8 @@ class Monitor:
             "uptime": self.get_uptime(),
             "load_avg": self.get_load_average(),
             "kernel_release": self.get_kernel_release(),
-            "memory": self.get_memory_usage()
-            "disk"
+            "memory": self.get_memory_usage(),
+            "disk":0
         }
         return json.dumps(data)
 
