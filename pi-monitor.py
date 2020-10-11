@@ -33,9 +33,10 @@ class Monitor:
     def get_kernel_release(self):
         return subprocess.check_output("uname -r", shell=True).decode("utf8").strip()
         
-    def get_disk_percent(self)
-		cmd = 'df -h | awk \'$NF=="/"{printf "%.lf%%"}", $5}\''
-		return subprocess.check_output(cmd, shell=True).decode("utf-8")
+    def get_disk_percent(self):
+        
+        cmd = 'df -h | awk \'$NF=="/"{printf "%.1f%%\", $5}\''
+        return subprocess.check_output(cmd, shell=True).decode("utf-8")
 
 
      #returns total, free and available memory in kB
