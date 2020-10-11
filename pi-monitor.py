@@ -61,7 +61,7 @@ class Monitor:
             "load_avg": self.get_load_average(),
             "kernel_release": self.get_kernel_release(),
             "memory": self.get_memory_usage()
-            "disk":0
+            "disk"
         }
         return json.dumps(data)
 
