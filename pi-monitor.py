@@ -58,9 +58,10 @@ class Monitor:
         data = {
             "soc_temperature": self.get_soc_temperature(),
             "uptime": self.get_uptime(),
-            "load_average": self.get_load_average(),
+            "load_avg": self.get_load_average(),
             "kernel_release": self.get_kernel_release(),
             "memory": self.get_memory_usage()
+            "disk":0
         }
         return json.dumps(data)
 

@@ -6,8 +6,8 @@ This is just a very simple Python script using a http server to provide some Ras
 
 ## Usage
 
-The server will make a single endpoint available on the default port `8088`:
-`http://YOUR_IP:8088/monitor.json` that will return a JSON like this:
+The server will make a single endpoint available on the default port `8089`:
+`http://YOUR_IP:8089/monitor.json` that will return a JSON like this:
 
 ```json
 {
@@ -39,7 +39,7 @@ If you're running it using the automatic installation you can change the usernam
 
 ```
 [Service]
-ExecStart=/usr/bin/python3 -u /usr/local/bin/pi-monitor.py 8088
+ExecStart=/usr/bin/python3 -u /usr/local/bin/pi-monitor.py 8089
 User=pi
 ```
 
