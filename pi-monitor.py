@@ -80,7 +80,7 @@ class MonitorServer(BaseHTTPRequestHandler):
             self.wfile.write(response)
 
 
-port = 8088
+port = 8089
 port_argument = sys.argv[-1]
 if port_argument.isdigit():
     port = int(port_argument)
