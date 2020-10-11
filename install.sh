@@ -5,8 +5,8 @@ echo ""
 
 echo "Downloading files..."
 
-wget https://raw.githubusercontent.com/Bunn/pi_monitor/master/pi-monitor.py
-wget https://raw.githubusercontent.com/Bunn/pi_monitor/master/pi-monitor.service
+wget https://raw.githubusercontent.com/nwhitten/pi_monitor/master/pi-monitor.py
+wget https://raw.githubusercontent.com/nwhitten/pi_monitor/master/pi-monitor.service
 
 echo ""
 
