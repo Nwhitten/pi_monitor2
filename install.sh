@@ -17,8 +17,8 @@ rm /etc/systemd/system/pi-monitor2.service
 echo ""
 
 echo "Moving files..."
-mv pi-monitor.py /usr/local/bin/
-mv pi-monitor.service /etc/systemd/system/
+mv pi-monitor2.py /usr/local/bin/
+mv pi-monitor2.service /etc/systemd/system/
 
 echo ""
 
