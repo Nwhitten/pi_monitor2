@@ -7,7 +7,7 @@ This is just a very simple Python script using a http server to provide some Ras
 ## Usage
 
 The server will make a single endpoint available on the default port `8089`:
-`http://YOUR_IP:8089/monitor.json` that will return a JSON like this:
+`http://YOUR_IP:8089/monitor2.json` that will return a JSON like this:
 
 ```json
 {
@@ -27,7 +27,7 @@ The server will make a single endpoint available on the default port `8089`:
 
 ### Automatic
 
-`wget -O - https://raw.githubusercontent.com/nwhitten/pi_monitor/master/install.sh | sudo bash`
+`wget -O - https://raw.githubusercontent.com/nwhitten/pi_monitor/master/install2.sh | sudo bash`
 
 ### Manual
 
@@ -39,17 +39,17 @@ If you're running it using the automatic installation you can change the usernam
 
 ```
 [Service]
-ExecStart=/usr/bin/python3 -u /usr/local/bin/pi-monitor.py 8089
+ExecStart=/usr/bin/python3 -u /usr/local/bin/pi-monitor2.py 8089
 User=pi
 ```
 
 Before doing so, make sure to stop the service with
-`sudo systemctl stop pi-monitor.service`
+`sudo systemctl stop pi-monitor2.service`
 and then start it again after your changes with
-`sudo systemctl start pi-monitor.service`
+`sudo systemctl start pi-monitor2.service`
 
 If you're running it manually you can just change the default port by sending it as a parameter like:
-`python3 pi_monitor.py 8181`
+`python3 pi_monitor2.py 8181`
 
 ## Compatibility
 
