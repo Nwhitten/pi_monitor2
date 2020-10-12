@@ -1,18 +1,18 @@
 #!/bin/bash
-systemctl stop pi-monitor.service
+systemctl stop pi-monitor2.service
 
 echo ""
 
 echo "Downloading files..."
 
-wget https://raw.githubusercontent.com/nwhitten/pi_monitor/master/pi-monitor.py
-wget https://raw.githubusercontent.com/nwhitten/pi_monitor/master/pi-monitor.service
+wget https://raw.githubusercontent.com/nwhitten/pi_monitor/master/pi-monitor2.py
+wget https://raw.githubusercontent.com/nwhitten/pi_monitor/master/pi-monitor2.service
 
 echo ""
 
 echo "Removing old files files..."
-rm /usr/local/bin/pi-monitor.py
-rm /etc/systemd/system/pi-monitor.service
+rm /usr/local/bin/pi-monitor2.py
+rm /etc/systemd/system/pi-monitor2.service
 
 echo ""
 
@@ -24,5 +24,5 @@ echo ""
 
 echo "Starting pi-monitor service..."
 systemctl daemon-reload
-systemctl enable pi-monitor.service 
-systemctl start pi-monitor.service
+systemctl enable pi-monitor2.service 
+systemctl start pi-monitor2.service
