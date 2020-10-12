@@ -1,6 +1,7 @@
 import subprocess
 import re
 import json
+import psutil
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import sys
 
@@ -41,10 +42,9 @@ class Monitor:
         return subprocess.check_output(cmd, shell=True).decode("utf-8")
         
     def get_ipaddress(self):
-    	cmd = "hostname -I | cut -d' ' -f1"
-		return subprocess.check_output(cmd, shell=True).decode("utf-8")
-
-
+        cmd = "hostname -I | cut -d' ' -f1"
+        return subprocess.check_output(cmd, shell=True).decode("utf-8")
+    
      #returns total, free and available memory in kB
     def get_memory_usage(self):
         meminfo = subprocess.check_output("cat /proc/meminfo", shell=True).decode("utf8").strip()        
@@ -64,18 +64,23 @@ class Monitor:
             "available_memory": int(available_memory)
         }
         return data
+    
+    def get_memory_percent(self):
+        cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%s MB\", $3,$2}'"
+        return subprocess.check_output(cmd, shell=True).decode("utf-8")
 
     def get_json(self):
         data = {
-            "soc_temperature": self.get_soc_temperature(),
             "uptime": self.get_uptime(),
-            "load_avg": self.get_load_average(),
+            "ip": self.get_ipaddress(),
             "kernel_release": self.get_kernel_release(),
-            "memory": self.get_memory_usage(),
-            "disk_percent": self.get_disk_percent(),
-            "IP": self.get_ipaddress()
-        	"temp_C": selfget_thermal_temperature(),
+            "soc_temp": self.get_soc_temperature(),
+            "temp": self.get_thermal_temperature(),
+            "load_avg": self.get_load_average(),
             "cpu_percent": self.get_cpu_percent(),
+            "memory": self.get_memory_usage(),
+            "memory_Percent": self.get_memory_percent(),
+            "disk_percent": self.get_disk_percent()
         }
         return json.dumps(data)
 
@@ -90,7 +95,7 @@ class MonitorServer(BaseHTTPRequestHandler):
     def do_GET(self):
         self.set_response()
         print(self.path)
-        if self.path == "/monitor.json" or self.path == "/monitor":
+        if self.path == "/monitor2.json" or self.path == "/monitor2":
             response = Monitor().get_json().encode()
             self.wfile.write(response)
 
