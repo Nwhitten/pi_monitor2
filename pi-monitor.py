@@ -29,14 +29,20 @@ class Monitor:
         uptime = subprocess.check_output("uptime", shell=True).decode("utf8")
         load_average = uptime.split("load average:")[1].split(",")
         return list(map(float, load_average))
+    
+    def get_cpu_percent(self):
+    	return str(psutil.cpu_percent()) + "%"
 
     def get_kernel_release(self):
         return subprocess.check_output("uname -r", shell=True).decode("utf8").strip()
         
     def get_disk_percent(self):
-        
         cmd = 'df -h | awk \'$NF=="/"{printf "%.1f%%\", $5}\''
         return subprocess.check_output(cmd, shell=True).decode("utf-8")
+        
+    def get_ipaddress(self):
+    	cmd = "hostname -I | cut -d' ' -f1"
+		return subprocess.check_output(cmd, shell=True).decode("utf-8")
 
 
      #returns total, free and available memory in kB
@@ -66,7 +72,10 @@ class Monitor:
             "load_avg": self.get_load_average(),
             "kernel_release": self.get_kernel_release(),
             "memory": self.get_memory_usage(),
-            "disk": self.get_disk_percent()
+            "disk_percent": self.get_disk_percent(),
+            "IP": self.get_ipaddress()
+        	"temp_C": selfget_thermal_temperature(),
+            "cpu_percent": self.get_cpu_percent(),
         }
         return json.dumps(data)
 
