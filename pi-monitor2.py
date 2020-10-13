@@ -32,13 +32,13 @@ class Monitor:
         return list(map(float, load_average))
     
     def get_cpu_percent(self):
-    	return str(psutil.cpu_percent()) + "%"
+    	return str(psutil.cpu_percent())
 
     def get_kernel_release(self):
         return subprocess.check_output("uname -r", shell=True).decode("utf8").strip()
         
     def get_disk_percent(self):
-        cmd = 'df -h | awk \'$NF=="/"{printf "%.1f%%\", $5}\''
+        cmd = 'df -h | awk \'$NF=="/"{printf "%.1f\", $5}\''
         return subprocess.check_output(cmd, shell=True).decode("utf-8")
         
     def get_ipaddress(self):
@@ -66,8 +66,11 @@ class Monitor:
         return data
     
     def get_memory_percent(self):
-        cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%s MB\", $3,$2}'"
+        cmd = "free -m | awk 'NR==2{printf \"%.1f%%\",$3*100/$2 }'"
         return subprocess.check_output(cmd, shell=True).decode("utf-8")
+
+
+
 
     def get_json(self):
         data = {
