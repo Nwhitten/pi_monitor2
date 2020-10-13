@@ -44,6 +44,8 @@ class Monitor:
     def get_ipaddress(self):
         cmd = "hostname -I | cut -d' ' -f1"
         return subprocess.check_output(cmd, shell=True).decode("utf-8")
+        IP = subprocess.check_output(cmd, shell=True).decode("utf-8")
+        
     
      #returns total, free and available memory in kB
     def get_memory_usage(self):
@@ -76,6 +78,7 @@ class Monitor:
         data = {
             "uptime": self.get_uptime(),
             "ip": self.get_ipaddress(),
+            "ip2": (IP),
             "kernel_release": self.get_kernel_release(),
             "soc_temp": self.get_soc_temperature(),
             "temp": self.get_thermal_temperature(),
