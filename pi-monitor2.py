@@ -66,7 +66,7 @@ class Monitor:
         return data
     
     def get_memory_percent(self):
-        cmd = "free -m | awk 'NR==2{printf \"%.1f%%\",$3*100/$2 }'"
+        cmd = "free -m | awk 'NR==2{printf \"%.1f\",$3*100/$2 }'"
         return subprocess.check_output(cmd, shell=True).decode("utf-8")
 
 
