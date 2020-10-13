@@ -11,15 +11,23 @@ The server will make a single endpoint available on the default port `8089`:
 
 ```json
 {
-  "soc_temperature": 50.5,
-  "uptime": 18551.34,
-  "load_average": [0.0, 0.2, 0.1],
-  "kernel_release": "5.4.51-v7+",
-  "memory": {
-    "total_memory": 441416,
-    "free_memory": 90536,
-    "available_memory": 279512
-  }
+
+	"uptime": 174896.66, 
+	"ip": "192.168.11.105\n", 
+	"kernel_release": "4.19.118-v7+", 
+	"soc_temp": 50.5, 
+	"temp": 49.9, 
+	"load_avg": [0.11, 0.26, 0.37], 
+	"cpu_load": "0.11", 
+	"cpu_percent": "9.9", 
+	"memory_usage": {
+		"total_memory": 441160, 
+		"free_memory": 83300, 
+		"available_memory": 187832
+	}, 
+	"memory_percent": "40.9", 
+	"disk_usage": "3/14", 
+	"disk_percent": "23.0"
 }
 ```
 
