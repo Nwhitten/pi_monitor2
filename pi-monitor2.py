@@ -1,28 +1,29 @@
 import subprocess
 import re
+import socket
 import json
 import psutil
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import sys
 
-
 class Monitor:
 
     def get_thermal_temperature(self):
-        thermal = subprocess.check_output(
-            "cat /sys/class/thermal/thermal_zone0/temp", shell=True).decode("utf8")
-        return float(thermal) / 1000.0
+        cmd ="cat /sys/class/thermal/thermal_zone0/temp"
+        thermal = subprocess.check_output(cmd, shell=True).decode("utf8")
+        #return float(thermal) / 1000.0
+        return round(float(thermal) / 1000.0, 1)
+
 
     # returns the temperature of the SoC as measured by the on-board temperature sensor
     def get_soc_temperature(self):
-        temp = subprocess.check_output(
-            "vcgencmd measure_temp", shell=True).decode("utf8")
+        cmd = "vcgencmd measure_temp"
+        temp = subprocess.check_output(cmd, shell=True).decode("utf8")
         return float(re.findall(r'\d+\.\d+', temp)[0])
 
     # uptime in seconds
     def get_uptime(self):
-        uptime = subprocess.check_output(
-            "cat /proc/uptime", shell=True).decode("utf8")
+        uptime = subprocess.check_output("cat /proc/uptime", shell=True).decode("utf8")
         return float(uptime.split(" ")[0])
 
     # returns load averages for 1, 5, and 15 minutes
@@ -31,11 +32,19 @@ class Monitor:
         load_average = uptime.split("load average:")[1].split(",")
         return list(map(float, load_average))
     
+    def get_cpu_load(self):
+        cmd = "top -bn1 | grep load | awk '{printf \"%.2f\", $(NF-2)}'"
+        return subprocess.check_output(cmd, shell=True).decode("utf-8")
+    
     def get_cpu_percent(self):
     	return str(psutil.cpu_percent())
 
     def get_kernel_release(self):
         return subprocess.check_output("uname -r", shell=True).decode("utf8").strip()
+    
+    def get_disk_usage(self):
+        cmd = 'df -h | awk \'$NF=="/"{printf "%d/%d", $3,$2,$5}\''
+        return subprocess.check_output(cmd, shell=True).decode("utf-8")
         
     def get_disk_percent(self):
         cmd = 'df -h | awk \'$NF=="/"{printf "%.1f\", $5}\''
@@ -44,9 +53,7 @@ class Monitor:
     def get_ipaddress(self):
         cmd = "hostname -I | cut -d' ' -f1"
         return subprocess.check_output(cmd, shell=True).decode("utf-8")
-        IP = subprocess.check_output(cmd, shell=True).decode("utf-8")
-        print (IP)
-        
+
     
      #returns total, free and available memory in kB
     def get_memory_usage(self):
@@ -83,9 +90,11 @@ class Monitor:
             "soc_temp": self.get_soc_temperature(),
             "temp": self.get_thermal_temperature(),
             "load_avg": self.get_load_average(),
+            "cpu_load": self.get_cpu_load(),
             "cpu_percent": self.get_cpu_percent(),
-            "memory": self.get_memory_usage(),
-            "memory_Percent": self.get_memory_percent(),
+            "memory_usage": self.get_memory_usage(),
+            "memory_percent": self.get_memory_percent(),
+            "disk_usage": self.get_disk_usage(),
             "disk_percent": self.get_disk_percent()
         }
         return json.dumps(data)
