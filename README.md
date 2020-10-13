@@ -39,11 +39,11 @@ The server will make a single endpoint available on the default port `8089`:
 
 ### Manual
 
-You can download the files manually and run it the way you like. If you don't want Pi Monitor to run as a service you can just run as `python3 pi_monitor.py`
+You can download the files manually and run it the way you like. If you don't want Pi Monitor to run as a service you can just run as `python3 pi_monitor2.py`
 
 ## Configuration
 
-If you're running it using the automatic installation you can change the username and default port in which Pi Monitor is running by changing the following settings on your `pi-monitor.service`
+If you're running it using the automatic installation you can change the username and default port in which Pi Monitor is running by changing the following settings on your `pi-monitor2.service`
 
 ```
 [Service]
@@ -58,6 +58,9 @@ and then start it again after your changes with
 
 If you're running it manually you can just change the default port by sending it as a parameter like:
 `python3 pi_monitor2.py 8181`
+
+Kill it all by using the following:
+`sudo systemctl stop pi-monitor2.service | sudo rm /usr/local/bin/pi-monitor2.py | sudo rm /etc/systemd/system/pi-monitor2.service |sudo systemctl daemon-reload`
 
 ## Compatibility
 
