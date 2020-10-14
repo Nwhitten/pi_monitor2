@@ -97,6 +97,7 @@ class Monitor:
         data = {
             "uptime": self.get_uptime(),
             "formatted_uptime": self.get_uptime_formatted(),
+            "host_name": socket.gethostname(),
             "ip": self.get_ipaddress(),
             "kernel_release": self.get_kernel_release(),
             "soc_temp": self.get_soc_temperature(),
