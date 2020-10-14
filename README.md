@@ -61,7 +61,10 @@ If you're running it manually you can just change the default port by sending it
 `python3 pi_monitor2.py 8181`
 
 Kill it all by using the following:
-`sudo systemctl stop pi-monitor2.service | sudo rm /usr/local/bin/pi-monitor2.py | sudo rm /etc/systemd/system/pi-monitor2.service |sudo systemctl daemon-reload`
+`sudo systemctl stop pi-monitor2.service`
+`sudo rm /usr/local/bin/pi-monitor2.py`
+`sudo rm /etc/systemd/system/pi-monitor2.service`
+`sudo systemctl daemon-reload`
 
 ## Compatibility
 
