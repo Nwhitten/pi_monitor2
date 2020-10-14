@@ -25,6 +25,17 @@ class Monitor:
     def get_uptime(self):
         uptime = subprocess.check_output("cat /proc/uptime", shell=True).decode("utf8")
         return float(uptime.split(" ")[0])
+        
+    def get_uptime_formatted(self):    
+    	time = get_uptime(self)
+		day = time // (24 * 3600)
+		time = time % (24 * 3600)
+		hour = time // 3600
+		time %= 3600
+		minutes = time // 60
+		time %= 60
+		seconds = time
+		return "d:h:m:s-> %d:%d:%d:%d"
 
     # returns load averages for 1, 5, and 15 minutes
     def get_load_average(self):
@@ -85,6 +96,7 @@ class Monitor:
     def get_json(self):
         data = {
             "uptime": self.get_uptime(),
+            "formatted_uptime": get_uptime_formatted,
             "ip": self.get_ipaddress(),
             "kernel_release": self.get_kernel_release(),
             "soc_temp": self.get_soc_temperature(),
