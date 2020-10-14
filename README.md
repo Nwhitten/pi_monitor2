@@ -13,13 +13,14 @@ The server will make a single endpoint available on the default port `8089`:
 {
 
 	"uptime": 174896.66, 
-	"ip": "192.168.11.105\n", 
+	"ip": "192.168.11.105", 
+	"formatted_uptime": "2d 01h 08m 44s",
 	"kernel_release": "4.19.118-v7+", 
 	"soc_temp": 50.5, 
 	"temp": 49.9, 
 	"load_avg": [0.11, 0.26, 0.37], 
-	"cpu_load": "0.11", 
-	"cpu_percent": "9.9", 
+	"load_current": "0.11", 
+	"load_percent": "9.9", 
 	"memory_usage": {
 		"total_memory": 441160, 
 		"free_memory": 83300, 
