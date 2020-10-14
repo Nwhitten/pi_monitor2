@@ -12,7 +12,7 @@ class Monitor:
         cmd ="cat /sys/class/thermal/thermal_zone0/temp"
         thermal = subprocess.check_output(cmd, shell=True).decode("utf8")
         #return float(thermal) / 1000.0
-        return round(float(thermal) / 1000.0, 1)
+        return round(float(thermal) / 1e3,1)
 
 
     # returns the temperature of the SoC as measured by the on-board temperature sensor
